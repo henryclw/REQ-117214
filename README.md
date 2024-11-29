@@ -3,7 +3,7 @@ BC Public Service REQ 117214
 
 # temp logs
 
-## python conda environment
+## python conda environment creation
 
 ```bash
 conda create --name py312bcps python=3.12
@@ -12,4 +12,11 @@ conda create --name py312bcps python=3.12
 source activate py312bcps
 # bash
 conda activate py312bcps
+```
+
+## package management
+
+```bash
+pip install -r ./requirements.txt --upgrade
+pip list --format=freeze > ./requirements.txt
 ```
