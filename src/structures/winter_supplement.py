@@ -58,17 +58,17 @@ class WinterSupplementInput:
 @dataclass
 class WinterSupplementOutput:
     id: str
-    isEligible: bool
-    baseAmount: float
-    childrenAmount: float
-    supplementAmount: float
+    is_eligible: bool
+    base_amount: float = 0.0
+    children_amount: float = 0.0
+    supplement_amount: float = 0.0
 
     def get_dict(self):
         # TODO: float point limit to .2f
         return {
             "id": self.id,
-            "isEligible": self.isEligible,
-            "baseAmount": self.baseAmount,
-            "childrenAmount": self.childrenAmount,
-            "supplementAmount": self.supplementAmount,
+            "isEligible": self.is_eligible,
+            "baseAmount": self.base_amount,
+            "childrenAmount": self.children_amount,
+            "supplementAmount": self.supplement_amount,
         }
