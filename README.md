@@ -20,3 +20,10 @@ conda activate py312bcps
 pip install -r ./requirements.txt --upgrade
 pip list --format=freeze > ./requirements.txt
 ```
+
+## test
+
+```bash
+cd src
+python -m unittest discover -s ./test
+```
