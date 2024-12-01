@@ -1,11 +1,18 @@
 from dataclasses import dataclass
+from enum import Enum
+
+
+# familyComposition could only be single or couple
+class FamilyCompositionType(Enum):
+    SINGLE = "single"
+    COUPLE = "couple"
 
 
 @dataclass
 class WinterSupplementInput:
     id: str
     number_of_children: int
-    family_composition: str
+    family_composition: FamilyCompositionType
     family_unit_in_pay_for_december: bool
 
     @staticmethod
@@ -31,14 +38,18 @@ class WinterSupplementInput:
         if type(input_dict["familyUnitInPayForDecember"]) is not bool:
             raise TypeError(f"familyUnitInPayForDecember type expect to be bool, got {type(input_dict["numberOfChildren"])}")
 
-        # make sure
-        if input_dict["familyComposition"] not in ["single", "couple"]:
-            raise ValueError(f"familyComposition should be \"single\" or \"couple\", got {input_dict["familyComposition"]} instead")
-
         id: str = input_dict["id"]
         number_of_children: int = input_dict["numberOfChildren"]
-        family_composition: str = input_dict["familyComposition"]
+        if number_of_children < 0:
+            raise ValueError(f"numberOfChildren should not be negative, got {number_of_children}")
+        if input_dict["familyComposition"] == FamilyCompositionType.SINGLE.value:
+            family_composition: FamilyCompositionType = FamilyCompositionType.SINGLE
+        elif input_dict["familyComposition"] == FamilyCompositionType.COUPLE.value:
+            family_composition: FamilyCompositionType = FamilyCompositionType.COUPLE
+        else:
+            raise ValueError(f"familyComposition should be \"single\" or \"couple\", got {input_dict["familyComposition"]} instead")
         family_unit_in_pay_for_december: bool = input_dict["familyUnitInPayForDecember"]
+
         return WinterSupplementInput(id=id, number_of_children=number_of_children,
                                      family_composition=family_composition,
                                      family_unit_in_pay_for_december=family_unit_in_pay_for_december)
