@@ -5,10 +5,22 @@ from utils.json_parser import read_winter_supplement_input
 
 class TestParser(unittest.TestCase):
 
-    def test_bad_1(self):
-        with open("./test/test_parser_examples/bad_1_input.json") as f:
+    def test_bad_010(self):
+        with open("./test/test_parser_examples/bad_010_input.json") as f:
             json_str = f.read()
-            with self.assertRaises(AssertionError):
+            with self.assertRaises(KeyError):
+                winter_supplement_input = read_winter_supplement_input(json_str)
+
+    def test_bad_020(self):
+        with open("./test/test_parser_examples/bad_020_input.json") as f:
+            json_str = f.read()
+            with self.assertRaises(TypeError):
+                winter_supplement_input = read_winter_supplement_input(json_str)
+
+    def test_bad_030(self):
+        with open("./test/test_parser_examples/bad_030_input.json") as f:
+            json_str = f.read()
+            with self.assertRaises(ValueError):
                 winter_supplement_input = read_winter_supplement_input(json_str)
 
     def test_good_1(self):
