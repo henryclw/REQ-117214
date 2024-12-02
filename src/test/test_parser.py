@@ -1,6 +1,6 @@
 import unittest
 
-from structures.winter_supplement import FamilyCompositionType
+from structure.winter_supplement import FamilyCompositionType
 from utils.json_parser import read_winter_supplement_input
 
 

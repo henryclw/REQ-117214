@@ -1,7 +1,7 @@
 import json
 import logging
 
-from structures.winter_supplement import WinterSupplementInput
+from structure.winter_supplement import WinterSupplementInput
 
 
 logger = logging.getLogger(__name__)
