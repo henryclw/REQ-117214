@@ -1,9 +1,8 @@
 import logging
 
-import paho.mqtt.client as mqtt
-
 from engine.rule_engine import calculate_eligible_supplement
 from utils.json_parser import read_winter_supplement_input
+
 
 logger = logging.getLogger(__name__)
 
