@@ -1,5 +1,7 @@
+import json
 from dataclasses import dataclass
 from enum import Enum
+from typing import Dict, Optional
 
 
 # familyComposition could only be single or couple
@@ -16,7 +18,7 @@ class WinterSupplementInput:
     family_unit_in_pay_for_december: bool
 
     @staticmethod
-    def new_one_from_dict(input_dict):
+    def new_one_from_dict(input_dict) -> Optional["WinterSupplementInput"]:
 
         # make sure that every key is in the input data
         if "id" not in input_dict:
@@ -63,7 +65,7 @@ class WinterSupplementOutput:
     children_amount: float = 0.0
     supplement_amount: float = 0.0
 
-    def get_dict(self):
+    def get_dict(self) -> Dict:
         # TODO: float point limit to .2f
         return {
             "id": self.id,
@@ -72,3 +74,15 @@ class WinterSupplementOutput:
             "childrenAmount": self.children_amount,
             "supplementAmount": self.supplement_amount,
         }
+
+    def get_json_str(self) -> str:
+        json_dict = {
+            "id": self.id,
+            "isEligible": self.is_eligible,
+            "baseAmount": self.base_amount,
+            "childrenAmount": self.children_amount,
+            "supplementAmount": self.supplement_amount,
+        }
+        json.encoder.FLOAT_REPR = lambda o: format(o, '.2f')
+        json_str = json.dumps(json_dict)
+        return json_str

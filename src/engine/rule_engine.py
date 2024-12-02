@@ -6,7 +6,7 @@ from structure.winter_supplement import WinterSupplementInput, WinterSupplementO
 logger = logging.getLogger(__name__)
 
 
-def calculate_eligible_supplement(winter_supplement_input: WinterSupplementInput):
+def calculate_eligible_supplement(winter_supplement_input: WinterSupplementInput) -> WinterSupplementOutput:
     logger.debug(f"Got winter_supplement_input: {winter_supplement_input}")
     is_eligible = winter_supplement_input.family_unit_in_pay_for_december
     output: WinterSupplementOutput = WinterSupplementOutput(
