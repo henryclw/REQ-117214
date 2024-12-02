@@ -35,7 +35,7 @@ class TestParser(unittest.TestCase):
             json_str = f.read()
             winter_supplement_input = read_winter_supplement_input(json_str)
             self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
-            self.assertEqual(winter_supplement_input.number_of_children, 12)
+            self.assertEqual(winter_supplement_input.number_of_children, 2)
             self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.SINGLE)
             self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, True)
 

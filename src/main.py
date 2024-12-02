@@ -1,6 +1,7 @@
 import argparse
 import logging
 
+from engine.rule_engine import calculate_eligible_supplement
 from utils.json_parser import read_winter_supplement_input
 
 
@@ -28,5 +29,6 @@ if __name__ == "__main__":
     with open("./test/test_parser_examples/good_010_input.json") as f:
         json_str = f.read()
         winter_supplement_input = read_winter_supplement_input(json_str)
-        print()
-        logger.debug(f"Got winter_supplement_input: {winter_supplement_input}")
+        logger.debug(f"Read winter_supplement_input: {winter_supplement_input}")
+        output = calculate_eligible_supplement(winter_supplement_input)
+        logger.info(f"calculate result: {output}")
