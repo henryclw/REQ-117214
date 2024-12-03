@@ -1,0 +1,16 @@
+name: Docker Build Test
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker_build_test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Action
+      uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile
