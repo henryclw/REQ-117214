@@ -1,9 +1,11 @@
 import argparse
+import glob
 import logging
 import os
 import paho.mqtt.client as mqtt
 import time
 
+from typing import List
 from utils.config_helper import BasicConfig
 
 logger = logging.getLogger(__name__)
@@ -27,10 +29,13 @@ def on_connect(client, userdata, flags, reason_code, properties):
     logger.info("Connected with result code " + str(reason_code))
 
 
-def read_example_list():
-    with open("test/test_parser_examples/good_input_010.json") as f:
-        json_str = f.read()
-    return [json_str]
+def read_example_list() -> List[str]:
+    all_filenames = glob.glob("test/test_parser_examples/good_input_*.json")
+    all_json_str = []
+    for filename in all_filenames:
+        with open(filename) as f:
+            all_json_str.append(f.read())
+    return all_json_str
 
 
 if __name__ == "__main__":
@@ -59,7 +64,7 @@ if __name__ == "__main__":
     BasicConfig.set_config_from_args(args)
     basic_config = BasicConfig.get_config()
 
-    logging.basicConfig(level=logging.DEBUG,
+    logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s")
     logger.info("Started mock web script")
     logger.info(script_description)
@@ -82,10 +87,10 @@ if __name__ == "__main__":
     time.sleep(3)
     for example_input in example_list:
         publish_info = mqtt_client.publish(f"BRE/calculateWinterSupplementInput/{topic_id}", example_input)
-        logger.info(f"try publishing {example_input} into BRE/calculateWinterSupplementInput/{topic_id}")
+        logger.debug(f"try publishing payload into BRE/calculateWinterSupplementInput/{topic_id}")
         publish_info.wait_for_publish()
-        logger.info(f"published payload into BRE/calculateWinterSupplementInput/{topic_id}")
+        logger.info(f"published payload {example_input} into BRE/calculateWinterSupplementInput/{topic_id}")
+        time.sleep(5)
 
-    time.sleep(60)
     mqtt_client.loop_stop()
     logger.info("Ended mock web script")

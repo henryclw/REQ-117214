@@ -35,9 +35,72 @@ class TestParser(unittest.TestCase):
             json_str = f.read()
             winter_supplement_input = read_winter_supplement_input(json_str)
             self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
+            self.assertEqual(winter_supplement_input.number_of_children, 0)
+            self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.SINGLE)
+            self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, True)
+
+    def test_input_good_011(self):
+        with open("./test/test_parser_examples/good_input_011.json") as f:
+            json_str = f.read()
+            winter_supplement_input = read_winter_supplement_input(json_str)
+            self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
+            self.assertEqual(winter_supplement_input.number_of_children, 0)
+            self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.COUPLE)
+            self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, True)
+
+    def test_input_good_012(self):
+        with open("./test/test_parser_examples/good_input_012.json") as f:
+            json_str = f.read()
+            winter_supplement_input = read_winter_supplement_input(json_str)
+            self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
             self.assertEqual(winter_supplement_input.number_of_children, 2)
             self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.SINGLE)
             self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, True)
+
+    def test_input_good_013(self):
+        with open("./test/test_parser_examples/good_input_013.json") as f:
+            json_str = f.read()
+            winter_supplement_input = read_winter_supplement_input(json_str)
+            self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
+            self.assertEqual(winter_supplement_input.number_of_children, 3)
+            self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.COUPLE)
+            self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, True)
+
+    def test_input_good_020(self):
+        with open("./test/test_parser_examples/good_input_020.json") as f:
+            json_str = f.read()
+            winter_supplement_input = read_winter_supplement_input(json_str)
+            self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
+            self.assertEqual(winter_supplement_input.number_of_children, 0)
+            self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.SINGLE)
+            self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, False)
+
+    def test_input_good_021(self):
+        with open("./test/test_parser_examples/good_input_021.json") as f:
+            json_str = f.read()
+            winter_supplement_input = read_winter_supplement_input(json_str)
+            self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
+            self.assertEqual(winter_supplement_input.number_of_children, 0)
+            self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.COUPLE)
+            self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, False)
+
+    def test_input_good_022(self):
+        with open("./test/test_parser_examples/good_input_022.json") as f:
+            json_str = f.read()
+            winter_supplement_input = read_winter_supplement_input(json_str)
+            self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
+            self.assertEqual(winter_supplement_input.number_of_children, 2)
+            self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.SINGLE)
+            self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, False)
+
+    def test_input_good_023(self):
+        with open("./test/test_parser_examples/good_input_023.json") as f:
+            json_str = f.read()
+            winter_supplement_input = read_winter_supplement_input(json_str)
+            self.assertEqual(winter_supplement_input.id, "f48912a6-41b6-48dd-a610-a922984a0e37")
+            self.assertEqual(winter_supplement_input.number_of_children, 3)
+            self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.COUPLE)
+            self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, False)
 
     def test_output_good_010(self):
         winter_supplement_output = WinterSupplementOutput(

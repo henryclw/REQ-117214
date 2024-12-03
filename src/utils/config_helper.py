@@ -12,7 +12,7 @@ class BasicConfig:
     _inner_config: ConfigHolder = None
 
     @staticmethod
-    def set_config_from_args(args):
+    def set_config_from_args(args) -> None:
         if args.mqtt_topic_id == "NULL":
             raise ValueError("MQTT topic id is never set, " +
                              "please set it either using command line args or environment variable")
