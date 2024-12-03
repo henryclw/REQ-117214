@@ -3,10 +3,8 @@ import logging
 import os
 import paho.mqtt.client as mqtt
 
-from engine.rule_engine import calculate_eligible_supplement
 from message_queue.mqtt_connection import MqttConnection
 from utils.config_helper import BasicConfig
-from utils.json_parser import read_winter_supplement_input
 
 
 logger = logging.getLogger(__name__)
@@ -42,15 +40,8 @@ if __name__ == "__main__":
     logging.basicConfig(level=numeric_level,
                         format="%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s")
 
-    with open("test/test_parser_examples/good_input_010.json") as f:
-        json_str = f.read()
-        winter_supplement_input = read_winter_supplement_input(json_str)
-        logger.debug(f"Read winter_supplement_input: {winter_supplement_input}")
-        output = calculate_eligible_supplement(winter_supplement_input)
-        logger.info(f"calculate result: {output}")
-
-    logger.info("--------------------")
-    logger.info(f"topic id is {basic_config.mqtt_topic_id}")
+    logger.info(f"Program started with mqtt_topic_id: {basic_config.mqtt_topic_id}")
+    logger.info(f"Going to connect MQTT at host {basic_config.mqtt_hostname} with port {basic_config.mqtt_port}")
 
     mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
     mqtt_connection = MqttConnection(topic_id=basic_config.mqtt_topic_id)

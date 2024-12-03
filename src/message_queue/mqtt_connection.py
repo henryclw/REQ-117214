@@ -14,7 +14,7 @@ class MqttConnection:
 
     # The callback for when the client receives a CONNACK response from the server.
     def on_connect(self, client, userdata, flags, reason_code, properties):
-        logger.info(f"Connected with result code {reason_code}")
+        logger.info(f"Connected to MQTT server with result code {reason_code}")
         # Subscribing in on_connect() means that if we lose the connection and
         # reconnect then subscriptions will be renewed.
         client.subscribe("BRE/calculateWinterSupplementInput/" + self.topic_id)

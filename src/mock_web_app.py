@@ -26,7 +26,7 @@ def on_message(client, userdata, msg):
 
 
 def on_connect(client, userdata, flags, reason_code, properties):
-    logger.info("Connected with result code " + str(reason_code))
+    logger.info("Connected to MQTT server with result code " + str(reason_code))
 
 
 def read_example_list() -> List[str]:
