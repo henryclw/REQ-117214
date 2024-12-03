@@ -49,6 +49,8 @@ The sources that I referred to when during the development stage:
 - MQTT
   - <https://pypi.org/project/paho-mqtt/>
   - <https://github.com/eclipse-paho/paho.mqtt.python>
+- GitHub CI/CD
+  - <https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python>
 
 ## Possible improvement
 
