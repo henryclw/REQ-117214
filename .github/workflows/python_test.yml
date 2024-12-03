@@ -26,6 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Test with unittest
+        working-directory: ./src
         env:  # Set PYTHONPATH to include the src/ directory
           PYTHONPATH: ./src
-        run: python -m unittest discover -s ./src/test -v
+        run: python -m unittest discover -s ./test -v
