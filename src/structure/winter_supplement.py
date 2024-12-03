@@ -1,4 +1,5 @@
 import json
+import re
 
 from dataclasses import dataclass
 from enum import Enum
@@ -67,7 +68,6 @@ class WinterSupplementOutput:
     supplement_amount: float = 0.0
 
     def get_dict(self) -> Dict:
-        # TODO: float point limit to .2f
         return {
             "id": self.id,
             "isEligible": self.is_eligible,
@@ -77,6 +77,10 @@ class WinterSupplementOutput:
         }
 
     def get_json_str(self) -> str:
+        """
+        Return this output in json string format.
+        Noted that the floats always have two decimal places, because this is for money, the smallest unit is cents.
+        """
         json_dict = {
             "id": self.id,
             "isEligible": self.is_eligible,
@@ -84,5 +88,21 @@ class WinterSupplementOutput:
             "childrenAmount": f"{self.children_amount:.2f}",
             "supplementAmount": f"{self.supplement_amount:.2f}",
         }
+        # Because json.dumps couldn't set the float decimal easily
+        # The floats related to money are converted into strings, and then use regex to trim the quotation marks
         json_str = json.dumps(json_dict)
-        return json_str
+        return WinterSupplementOutput.trim_string_into_float_in_json_str(json_str)
+
+    @staticmethod
+    def trim_string_into_float_in_json_str(json_str: str) -> str:
+        """
+        Trim possible string into float inside the json string
+        :param json_str: floats in string format
+        :return: floats in number format
+        Example input:
+        '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": false, "baseAmount": "0.00", "childrenAmount": "0.00", "supplementAmount": "0.00"}'
+        example output:
+        '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": false, "baseAmount": 0.00, "childrenAmount": 0.00, "supplementAmount": 0.00}'
+        """
+        str_output = re.sub(r"(\")(\d+\.\d{2})(\")", r"\2", json_str)
+        return str_output

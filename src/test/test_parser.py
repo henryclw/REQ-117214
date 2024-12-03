@@ -1,6 +1,6 @@
 import unittest
 
-from structure.winter_supplement import FamilyCompositionType
+from structure.winter_supplement import FamilyCompositionType, WinterSupplementOutput
 from utils.json_parser import read_winter_supplement_input
 
 
@@ -38,6 +38,50 @@ class TestParser(unittest.TestCase):
             self.assertEqual(winter_supplement_input.number_of_children, 2)
             self.assertEqual(winter_supplement_input.family_composition, FamilyCompositionType.SINGLE)
             self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, True)
+
+    def test_output_good_010(self):
+        winter_supplement_output = WinterSupplementOutput(
+            id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
+            is_eligible=False,
+            base_amount=0.0,
+            children_amount=0.0,
+            supplement_amount=0.0
+        )
+        json_str_target = '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": false, "baseAmount": 0.00, "childrenAmount": 0.00, "supplementAmount": 0.00}'
+        self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
+
+    def test_output_good_020(self):
+        winter_supplement_output = WinterSupplementOutput(
+            id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
+            is_eligible=True,
+            base_amount=120,
+            children_amount=40,
+            supplement_amount=160
+        )
+        json_str_target = '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": true, "baseAmount": 120.00, "childrenAmount": 40.00, "supplementAmount": 160.00}'
+        self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
+
+    def test_output_good_021(self):
+        winter_supplement_output = WinterSupplementOutput(
+            id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
+            is_eligible=True,
+            base_amount=120.0,
+            children_amount=40.0,
+            supplement_amount=160.0
+        )
+        json_str_target = '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": true, "baseAmount": 120.00, "childrenAmount": 40.00, "supplementAmount": 160.00}'
+        self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
+
+    def test_output_good_022(self):
+        winter_supplement_output = WinterSupplementOutput(
+            id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
+            is_eligible=True,
+            base_amount=120.0,
+            children_amount=40.00000000001,
+            supplement_amount=159.99999999
+        )
+        json_str_target = '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": true, "baseAmount": 120.00, "childrenAmount": 40.00, "supplementAmount": 160.00}'
+        self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
 
 
 if __name__ == '__main__':
