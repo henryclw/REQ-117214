@@ -80,10 +80,9 @@ class WinterSupplementOutput:
         json_dict = {
             "id": self.id,
             "isEligible": self.is_eligible,
-            "baseAmount": self.base_amount,
-            "childrenAmount": self.children_amount,
-            "supplementAmount": self.supplement_amount,
+            "baseAmount": f"{self.base_amount:.2f}",
+            "childrenAmount": f"{self.children_amount:.2f}",
+            "supplementAmount": f"{self.supplement_amount:.2f}",
         }
-        json.encoder.FLOAT_REPR = lambda o: format(o, '.2f')
         json_str = json.dumps(json_dict)
         return json_str

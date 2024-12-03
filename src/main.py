@@ -42,7 +42,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=numeric_level,
                         format="%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s")
 
-    with open("./test/test_parser_examples/good_010_input.json") as f:
+    with open("test/test_parser_examples/good_input_010.json") as f:
         json_str = f.read()
         winter_supplement_input = read_winter_supplement_input(json_str)
         logger.debug(f"Read winter_supplement_input: {winter_supplement_input}")

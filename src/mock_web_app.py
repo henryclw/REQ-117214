@@ -28,7 +28,7 @@ def on_connect(client, userdata, flags, reason_code, properties):
 
 
 def read_example_list():
-    with open("test/test_parser_examples/good_010_input.json") as f:
+    with open("test/test_parser_examples/good_input_010.json") as f:
         json_str = f.read()
     return [json_str]
 
