@@ -73,6 +73,7 @@ class TestParser(unittest.TestCase):
         self.assertAlmostEqual(winter_supplement_output.supplement_amount, 180)
 
     def test_rule_engine_good_020(self):
+        # should be 0 for non-eligible
         winter_supplement_input = WinterSupplementInput(
             id="5243e4c8-c021-4fbc-b45d-59e5dc951adf",
             number_of_children=0,
@@ -87,6 +88,7 @@ class TestParser(unittest.TestCase):
         self.assertAlmostEqual(winter_supplement_output.supplement_amount, 0)
 
     def test_rule_engine_good_021(self):
+        # should be 0 for non-eligible
         winter_supplement_input = WinterSupplementInput(
             id="5243e4c8-c021-4fbc-b45d-59e5dc951adf",
             number_of_children=0,
@@ -101,6 +103,7 @@ class TestParser(unittest.TestCase):
         self.assertAlmostEqual(winter_supplement_output.supplement_amount, 0)
 
     def test_rule_engine_good_022(self):
+        # should be 0 for non-eligible
         winter_supplement_input = WinterSupplementInput(
             id="5243e4c8-c021-4fbc-b45d-59e5dc951adf",
             number_of_children=2,
@@ -115,6 +118,7 @@ class TestParser(unittest.TestCase):
         self.assertAlmostEqual(winter_supplement_output.supplement_amount, 0)
 
     def test_rule_engine_good_023(self):
+        # should be 0 for non-eligible
         winter_supplement_input = WinterSupplementInput(
             id="5243e4c8-c021-4fbc-b45d-59e5dc951adf",
             number_of_children=3,

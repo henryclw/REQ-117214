@@ -7,24 +7,28 @@ from utils.json_parser import read_winter_supplement_input
 class TestParser(unittest.TestCase):
 
     def test_input_bad_010(self):
+        # missing key in input json
         with open("./test/test_parser_examples/bad_input_010.json") as f:
             json_str = f.read()
             with self.assertRaises(KeyError):
                 winter_supplement_input = read_winter_supplement_input(json_str)
 
     def test_input_bad_020(self):
+        # type error in input json, e.g. got string when expected int
         with open("./test/test_parser_examples/bad_input_020.json") as f:
             json_str = f.read()
             with self.assertRaises(TypeError):
                 winter_supplement_input = read_winter_supplement_input(json_str)
 
     def test_input_bad_030(self):
+        # unknown familyComposition
         with open("./test/test_parser_examples/bad_input_030.json") as f:
             json_str = f.read()
             with self.assertRaises(ValueError):
                 winter_supplement_input = read_winter_supplement_input(json_str)
 
     def test_input_bad_031(self):
+        # negative children amount
         with open("./test/test_parser_examples/bad_input_031.json") as f:
             json_str = f.read()
             with self.assertRaises(ValueError):
@@ -103,6 +107,7 @@ class TestParser(unittest.TestCase):
             self.assertEqual(winter_supplement_input.family_unit_in_pay_for_december, False)
 
     def test_output_good_010(self):
+        # test 0 amounts are handled as expected when converting the output into json string
         winter_supplement_output = WinterSupplementOutput(
             id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
             is_eligible=False,
@@ -113,7 +118,20 @@ class TestParser(unittest.TestCase):
         json_str_target = '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": false, "baseAmount": 0.00, "childrenAmount": 0.00, "supplementAmount": 0.00}'
         self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
 
+    def test_output_good_011(self):
+        # test 0 amounts are handled as expected when converting the output into json string
+        winter_supplement_output = WinterSupplementOutput(
+            id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
+            is_eligible=False,
+            base_amount=0,
+            children_amount=0,
+            supplement_amount=0
+        )
+        json_str_target = '{"id": "9097bf53-50b6-47a3-92ca-f6adfa380c8b", "isEligible": false, "baseAmount": 0.00, "childrenAmount": 0.00, "supplementAmount": 0.00}'
+        self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
+
     def test_output_good_020(self):
+        # test float point is handled as expected when converting the output into json string
         winter_supplement_output = WinterSupplementOutput(
             id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
             is_eligible=True,
@@ -125,6 +143,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
 
     def test_output_good_021(self):
+        # test float point is handled as expected when converting the output into json string
         winter_supplement_output = WinterSupplementOutput(
             id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
             is_eligible=True,
@@ -136,6 +155,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(winter_supplement_output.get_json_str(), json_str_target)
 
     def test_output_good_022(self):
+        # test float point is handled as expected when converting the output into json string
         winter_supplement_output = WinterSupplementOutput(
             id="9097bf53-50b6-47a3-92ca-f6adfa380c8b",
             is_eligible=True,
