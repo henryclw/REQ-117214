@@ -11,7 +11,6 @@ class MqttConnection:
     def __init__(self, topic_id):
         self.topic_id = topic_id
 
-
     # The callback for when the client receives a CONNACK response from the server.
     def on_connect(self, client, userdata, flags, reason_code, properties):
         logger.info(f"Connected to MQTT server with result code {reason_code}")
@@ -19,7 +18,6 @@ class MqttConnection:
         # reconnect then subscriptions will be renewed.
         client.subscribe("BRE/calculateWinterSupplementInput/" + self.topic_id)
         logger.info("subscribed " + "BRE/calculateWinterSupplementInput/" + self.topic_id)
-        # client.subscribe("#")
 
     # The callback for when a PUBLISH message is received from the server.
     def on_message(self, client, userdata, msg):
