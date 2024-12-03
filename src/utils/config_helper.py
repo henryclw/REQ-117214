@@ -19,7 +19,7 @@ class BasicConfig:
         BasicConfig._inner_config = ConfigHolder(
             mqtt_topic_id=args.mqtt_topic_id,
             mqtt_hostname=args.mqtt_hostname,
-            mqtt_port=args.mqtt_port,
+            mqtt_port=int(args.mqtt_port),
         )
 
     @staticmethod
