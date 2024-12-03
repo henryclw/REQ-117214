@@ -21,8 +21,7 @@ def on_subscribe(client, userdata, mid, reason_code_list, properties):
 
 
 def on_message(client, userdata, msg):
-    if "WinterSupplement" in msg.topic:
-        logger.info(f"Got result from topic: {msg.topic}\n{msg.payload}")
+    logger.info(f"Got result from topic: {msg.topic}\n{msg.payload}")
 
 
 def on_connect(client, userdata, flags, reason_code, properties):
