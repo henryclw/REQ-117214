@@ -18,8 +18,9 @@ if __name__ == "__main__":
         description="This program is designed to solve the written assignment of the REQ117214",
         epilog=""
     )
-    parser.add_argument("--log",
-                        help="the logging level of this program, the default level is INFO", default="INFO")
+    parser.add_argument("--log_level",
+                        help="the logging level of this program, the default level is INFO",
+                        default=os.getenv("LOG_LEVEL", "INFO"))
     parser.add_argument("--mqtt_topic_id",
                         help="the topic id of mqtt, this could be the unique ID from the web calculator",
                         default=os.getenv("MQTT_TOPIC_ID", "NULL"))
@@ -34,9 +35,9 @@ if __name__ == "__main__":
     basic_config = BasicConfig.get_config()
 
     # setting up logging configs, the logging level is from command line args
-    numeric_level = getattr(logging, args.log, None)
+    numeric_level = getattr(logging, args.log_level, None)
     if not isinstance(numeric_level, int):
-        raise ValueError("Invalid log level: %s" % args.log)
+        raise ValueError("Invalid log level: %s" % args.log_level)
     logging.basicConfig(level=numeric_level,
                         format="%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s")
 

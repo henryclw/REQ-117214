@@ -42,6 +42,19 @@ cd src/structure
 python mock_web_app.py
 ```
 
+## GitHub CI/CD
+
+The unittest and docker build test is automatically executed when the branch has some updates or there's a pull request into the main branch. Which could be showed:
+[![Python package](https://github.com/henryclw/REQ-117214/actions/workflows/python_test.yml/badge.svg)](https://github.com/henryclw/REQ-117214/actions/workflows/python_test.yml)
+[![Docker Build Test](https://github.com/henryclw/REQ-117214/actions/workflows/docker_build_test.yml/badge.svg)](https://github.com/henryclw/REQ-117214/actions/workflows/docker_build_test.yml)
+
+## docker compose
+
+```bash
+docker compose up -d
+docker compose down
+```
+
 ## References
 
 The sources that I referred to when during the development stage:
