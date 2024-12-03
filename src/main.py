@@ -53,8 +53,5 @@ if __name__ == "__main__":
 
     mqtt_client.connect(basic_config.mqtt_hostname, basic_config.mqtt_port, 60)
 
-    # Blocking call that processes network traffic, dispatches callbacks and
-    # handles reconnecting.
-    # Other loop*() functions are available that give a threaded interface and a
-    # manual interface.
+    # Blocking call that processes network traffic, dispatches callbacks and handles reconnecting.
     mqtt_client.loop_forever()

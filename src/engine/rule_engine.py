@@ -16,7 +16,7 @@ def calculate_eligible_supplement(winter_supplement_input: WinterSupplementInput
     if not is_eligible:  # return 0 for the non-eligible family
         logger.debug(f"Return non-eligible output: {output}")
         return output
-    else:
+    else:  # eligible
         if winter_supplement_input.number_of_children == 0:  # childless family
             if winter_supplement_input.family_composition is FamilyCompositionType.SINGLE:
                 output.base_amount = 60
@@ -27,9 +27,10 @@ def calculate_eligible_supplement(winter_supplement_input: WinterSupplementInput
         elif winter_supplement_input.number_of_children > 0:  # family with children
             output.base_amount = 120
             output.children_amount = winter_supplement_input.number_of_children * 20
-        else:  # family with children
+        else:
             raise ValueError(f"Number of children should not be negative, got {winter_supplement_input.number_of_children}")
 
+        # the supplement amount is the sum
         output.supplement_amount = output.base_amount + output.children_amount
         logger.debug(f"Return eligible output: {output}")
         return output
